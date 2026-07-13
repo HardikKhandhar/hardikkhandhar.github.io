@@ -9,10 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const formattedYears = diffYears.toFixed(1); // e.g., "9.2"
   const yearsInt = Math.floor(diffYears);       // e.g., 9
 
-  // Update experience count-up target to match dynamic integer years of experience
+  // Update experience target and text to match dynamic integer years of experience
   const experienceCounter = document.getElementById('experience-counter');
   if (experienceCounter) {
     experienceCounter.setAttribute('data-target', yearsInt);
+    experienceCounter.textContent = yearsInt;
   }
 
   // Update references to experience years in text
@@ -174,39 +175,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// 6. Global Stats Counter Increment (called from IntersectionObserver in animation.js)
+// 6. Global Stats Counter (sets the values directly instead of counting up)
 window.animateCounters = () => {
   const counters = document.querySelectorAll('.count-up');
   counters.forEach(counter => {
-    // Prevent duplicate counting
-    if (counter.classList.contains('counted')) return;
-    counter.classList.add('counted');
-
     const targetVal = counter.getAttribute('data-target');
-    if (!targetVal) return;
-    const target = parseFloat(targetVal);
-    if (isNaN(target)) return;
-    const isFloat = targetVal.includes('.');
-    const duration = 2000; // Duration of animation in ms
-    const frameRate = 1000 / 60; // 60 FPS
-    const totalFrames = Math.round(duration / frameRate);
-    let frame = 0;
-
-    const countTo = () => {
-      frame++;
-      const progress = frame / totalFrames;
-      // Easing function: easeOutQuad
-      const easedProgress = progress * (2 - progress);
-      const currentVal = target * easedProgress;
-
-      if (frame < totalFrames) {
-        counter.textContent = isFloat ? currentVal.toFixed(1) : Math.round(currentVal);
-        requestAnimationFrame(countTo);
-      } else {
-        counter.textContent = isFloat ? target.toFixed(1) : target;
-      }
-    };
-
-    requestAnimationFrame(countTo);
+    if (targetVal) {
+      counter.textContent = targetVal;
+    }
   });
 };
