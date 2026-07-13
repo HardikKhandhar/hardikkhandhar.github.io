@@ -9,10 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const formattedYears = diffYears.toFixed(1); // e.g., "9.2"
   const yearsInt = Math.floor(diffYears);       // e.g., 9
 
-  // Update experience count-up target
+  // Update experience count-up target to match dynamic integer years of experience
   const experienceCounter = document.getElementById('experience-counter');
   if (experienceCounter) {
-    experienceCounter.setAttribute('data-target', formattedYears);
+    experienceCounter.setAttribute('data-target', yearsInt);
   }
 
   // Update references to experience years in text
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const handleScroll = () => {
     const scrollY = window.scrollY;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    
+
     // Scroll progress bar
     if (docHeight > 0 && scrollProgressBar) {
       const scrollPercent = (scrollY / docHeight) * 100;
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const typeAnimation = () => {
       const currentPhrase = phrases[phraseIdx];
-      
+
       if (isDeleting) {
         typeTarget.textContent = currentPhrase.substring(0, charIdx - 1);
         charIdx--;
@@ -136,7 +136,42 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(typeAnimation, 1000);
   }
 
+  // Render Selected Projects dynamically
+  const projectsContainer = document.getElementById('projects-container');
+  if (projectsContainer && typeof projectsData !== 'undefined') {
+    projectsContainer.innerHTML = '';
+    projectsData.forEach((project, index) => {
+      const techBadgesHTML = project.tech.map(tech => `<span class="project-tech-badge">${tech}</span>`).join('\n');
+      const bulletsHTML = project.responsibilities.map(resp => `
+        <div class="achievement-bullet">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span>${resp}</span>
+        </div>
+      `).join('\n');
 
+      const delayClass = index % 2 === 0 ? '' : ' reveal-delay-1';
+
+      const projectCard = document.createElement('div');
+      projectCard.className = `experience-card-item reveal fade-up${delayClass}`;
+      projectCard.innerHTML = `
+        <div class="experience-card-inner">
+          <div class="experience-card-header">
+            <h3 class="experience-role" style="font-size: 1.35rem; font-weight: 800; margin-top: 5px;">${project.title}</h3>
+            <span class="experience-company" style="font-weight: 500; opacity: 0.9; margin-top: 8px; color: var(--text-secondary); line-height: 1.4; text-transform: none; font-size: 0.92rem; font-family: var(--font-body);">${project.desc}</span>
+          </div>
+          <div class="experience-achievements" style="margin-bottom: 20px;">
+            ${bulletsHTML}
+          </div>
+          <div class="project-tech-list" style="margin-top: auto; border-top: 1px solid var(--border-color); padding-top: 15px;">
+            ${techBadgesHTML}
+          </div>
+        </div>
+      `;
+      projectsContainer.appendChild(projectCard);
+    });
+  }
 });
 
 // 6. Global Stats Counter Increment (called from IntersectionObserver in animation.js)
@@ -148,7 +183,9 @@ window.animateCounters = () => {
     counter.classList.add('counted');
 
     const targetVal = counter.getAttribute('data-target');
+    if (!targetVal) return;
     const target = parseFloat(targetVal);
+    if (isNaN(target)) return;
     const isFloat = targetVal.includes('.');
     const duration = 2000; // Duration of animation in ms
     const frameRate = 1000 / 60; // 60 FPS

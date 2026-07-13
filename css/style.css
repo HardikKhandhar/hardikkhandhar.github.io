@@ -409,10 +409,11 @@ h1, h2, h3, h4, h5, h6 {
    Hero Section
    ========================================================================== */
 .hero {
-  min-height: 100vh;
+  min-height: auto;
   display: flex;
   align-items: center;
-  padding-top: var(--header-height);
+  padding-top: 120px;
+  padding-bottom: 0;
   z-index: 1;
 }
 
@@ -624,9 +625,10 @@ h1, h2, h3, h4, h5, h6 {
   height: 20px;
 }
 
-/* ==========================================================================
-   About Me
-   ========================================================================== */
+#about {
+  padding-top: 50px;
+}
+
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1098,8 +1100,10 @@ h1, h2, h3, h4, h5, h6 {
    ========================================================================== */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 40px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Let the third/large projects span 2 columns occasionally if desired, or keep it standard grid */

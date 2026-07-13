@@ -47,23 +47,37 @@ document.addEventListener('DOMContentLoaded', () => {
     progressObserver.observe(fill);
   });
 
-  // 3. Stats Counter Trigger Observer
+  // 3. Stats Counter Trigger Observer (with failsafe and support checks)
   const statsSection = document.querySelector('.stats');
   if (statsSection) {
-    const statsObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          if (typeof window.animateCounters === 'function') {
-            window.animateCounters();
+    let triggered = false;
+    const triggerCounters = () => {
+      if (triggered) return;
+      triggered = true;
+      if (typeof window.animateCounters === 'function') {
+        window.animateCounters();
+      }
+    };
+
+    if ('IntersectionObserver' in window) {
+      const statsObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            triggerCounters();
+            observer.unobserve(entry.target);
           }
-          observer.unobserve(entry.target);
-        }
+        });
+      }, {
+        root: null,
+        threshold: 0.1 // Lower threshold (10% visible) ensures reliable trigger
       });
-    }, {
-      root: null,
-      threshold: 0.3
-    });
-    statsObserver.observe(statsSection);
+      statsObserver.observe(statsSection);
+    } else {
+      triggerCounters();
+    }
+
+    // Failsafe: Trigger counters after 4 seconds regardless of scroll position
+    setTimeout(triggerCounters, 4000);
   }
 
   // 4. Scroll Spy Navbar Highlight
