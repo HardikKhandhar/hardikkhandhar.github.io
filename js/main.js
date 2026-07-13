@@ -3,6 +3,24 @@
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Calculate dynamic years of experience (started 1 May 2017)
+  const startDate = new Date('2017-05-01');
+  const diffYears = (Date.now() - startDate.getTime()) / (365.25 * 24 * 60 * 60 * 1000);
+  const formattedYears = diffYears.toFixed(1); // e.g., "9.2"
+  const yearsInt = Math.floor(diffYears);       // e.g., 9
+
+  // Update experience count-up target
+  const experienceCounter = document.getElementById('experience-counter');
+  if (experienceCounter) {
+    experienceCounter.setAttribute('data-target', formattedYears);
+  }
+
+  // Update references to experience years in text
+  const dynamicExperienceTexts = document.querySelectorAll('.dynamic-experience-years');
+  dynamicExperienceTexts.forEach(el => {
+    el.textContent = yearsInt;
+  });
+
   // 1. Preloader
   const preloader = document.querySelector('.preloader');
   if (preloader) {
