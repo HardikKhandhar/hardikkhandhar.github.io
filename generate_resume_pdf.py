@@ -50,6 +50,12 @@ def generate_pdf():
     if li_match:
         linkedin = li_match.group(1).strip()
 
+    # Extract Languages
+    languages = "English, Hindi, Gujarati (Mother tongue)"
+    lang_match = re.search(r'Languages</span>\s*<span class="detail-value">([^<]+)</span>', html_clean)
+    if lang_match:
+        languages = lang_match.group(1).strip()
+
     # Format contact numbers
     phone_formatted = phone
     phone_clean = re.sub(r'[^\d+]', '', phone)
@@ -315,6 +321,12 @@ def generate_pdf():
     if other_skills:
         label_p = Paragraph("Tooling & Integrations:", skills_label_style)
         val_p = Paragraph(", ".join(other_skills), body_style)
+        skills_rows.append([label_p, val_p])
+
+    # Add Languages
+    if languages:
+        label_p = Paragraph("Languages:", skills_label_style)
+        val_p = Paragraph(languages, body_style)
         skills_rows.append([label_p, val_p])
 
     skills_table = Table(skills_rows, colWidths=[120, 434])
