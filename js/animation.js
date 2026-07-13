@@ -72,21 +72,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const scrollSpyObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
+      const id = entry.target.getAttribute('id');
+      const link = document.querySelector(`.nav-link[href="#${id}"]`);
+      if (!link) return;
+
       if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        navLinks.forEach(link => {
-          if (link.getAttribute('href') === `#${id}`) {
-            link.classList.add('active');
-          } else {
-            link.classList.remove('active');
-          }
-        });
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
       }
     });
   }, {
     root: null,
-    threshold: 0.4, // Highlight link when 40% of section is visible
-    rootMargin: '-10% 0px -50% 0px'
+    rootMargin: '-25% 0px -55% 0px',
+    threshold: 0
   });
 
   sections.forEach(section => {
