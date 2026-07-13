@@ -28,7 +28,7 @@ const projectsData = [
     desc: "An innovative web platform in which users can connect with an AI agent developed in Unreal Engine, utilizing Pixel Streaming to show Unreal within the browser.",
     responsibilities: [
       "Facilitated client communication and collected technical specifications.",
-      "Development of React website with authentication and custom interactive modules.",
+      "Development of React.js website with authentication and custom interactive modules.",
       "Handled server autoscaling to support real-time streaming load."
     ],
     tech: ["React.js", "Unreal Engine", "Pixel Streaming", "WebRTC", "Autoscaling"]

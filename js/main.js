@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const typeTarget = document.querySelector('.hero-typing');
   if (typeTarget) {
     const phrases = [
-      'Node.js • Laravel • React • AI Solutions',
+      'Node.js • Laravel • React.js • AI Solutions',
       'Senior Full Stack Developer',
       'REST API & Backend Specialist',
       'AI-Powered Solutions Creator'
