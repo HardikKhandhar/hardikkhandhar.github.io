@@ -1,0 +1,155 @@
+/* ==========================================================================
+   premium animation system - hardik khandhar portfolio
+   ========================================================================== */
+
+/* Page Loader */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+/* Floating Animations for Tech Badges (out of phase for natural feel) */
+@keyframes float1 {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(3deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes float2 {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(-3deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes float3 {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-18px) rotate(5deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+/* Background blob animations */
+@keyframes blobPulse {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+}
+
+/* Typing cursor blink */
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+/* Scroll Progress indicator pulse */
+@keyframes scrollProgress {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Reveal classes (triggered by Intersection Observer) */
+.reveal {
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform, opacity;
+}
+
+.reveal.fade-up {
+  transform: translateY(40px);
+}
+
+.reveal.fade-left {
+  transform: translateX(-40px);
+}
+
+.reveal.fade-right {
+  transform: translateX(40px);
+}
+
+.reveal.scale-up {
+  transform: scale(0.92);
+}
+
+.reveal.rotate-in {
+  transform: translateY(40px) rotate(-3deg);
+  transform-origin: bottom left;
+}
+
+/* Active reveal states */
+.reveal.revealed {
+  opacity: 1;
+  transform: translate(0) scale(1) rotate(0);
+}
+
+/* Delay modifiers for sequential item revealing */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+.reveal-delay-6 { transition-delay: 0.6s; }
+
+/* Apply floating animations */
+.float-item-1 {
+  animation: float1 5s ease-in-out infinite;
+}
+
+.float-item-2 {
+  animation: float2 6s ease-in-out infinite;
+}
+
+.float-item-3 {
+  animation: float3 7s ease-in-out infinite;
+}
+
+.blob-anim-1 {
+  animation: blobPulse 15s ease-in-out infinite alternate;
+}
+
+.blob-anim-2 {
+  animation: blobPulse 18s ease-in-out infinite alternate-reverse;
+}
+
+/* Progress bar dynamic loading keyframe */
+@keyframes fillProgress {
+  from { width: 0; }
+  to { width: var(--progress-width); }
+}
+
+.progress-active {
+  animation: fillProgress 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Pulse glow for buttons and items */
+.glow-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 15px var(--primary-glow);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  z-index: -1;
+}
+
+.glow-btn:hover::after {
+  opacity: 1;
+}
+
+/* Glowing text */
+.glow-text {
+  text-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+}

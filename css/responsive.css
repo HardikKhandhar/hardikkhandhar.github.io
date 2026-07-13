@@ -1,0 +1,246 @@
+/* ==========================================================================
+   responsive layout rules - hardik khandhar portfolio
+   ========================================================================== */
+
+/* 1024px Breakpoint (Tablets / Small Laptops) */
+@media (max-width: 1024px) {
+  :root {
+    --header-height: 70px;
+  }
+
+  .container {
+    width: 92%;
+  }
+
+  .hero-title {
+    font-size: 3.2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.5rem;
+  }
+
+  .hero-typing {
+    font-size: 1.3rem;
+  }
+
+  .about-grid {
+    gap: 40px;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+/* 768px Breakpoint (Mobile Landscape / Large Phones) */
+@media (max-width: 768px) {
+  section {
+    padding: 80px 0;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  /* Hamburger Menu Toggle Display */
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background-color: rgba(5, 8, 22, 0.98);
+    backdrop-filter: blur(20px);
+    border-left: 1px solid var(--border-color);
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 50px 40px;
+    gap: 35px;
+    z-index: 1000;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .nav-menu.active {
+    right: 0;
+  }
+
+  /* Hamburger Active Animation */
+  .hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .nav-actions {
+    display: none; /* Hide desktop download button, put it inside nav menu */
+  }
+
+  .nav-menu .btn {
+    display: flex;
+    width: 100%;
+  }
+
+  /* Hero Section Stack */
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .hero-intro {
+    margin: 0 auto 30px;
+  }
+
+  .hero-btns {
+    justify-content: center;
+  }
+
+  .hero-socials {
+    justify-content: center;
+  }
+
+  .hero-graphic {
+    height: 380px;
+    margin-top: 20px;
+  }
+
+  .graphic-container {
+    max-width: 320px;
+    height: 320px;
+  }
+
+  .illust-cube {
+    width: 180px;
+    height: 180px;
+  }
+
+  /* About Me Stack */
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .about-profile-card {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* Skills Stack */
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  /* Experience Stack */
+  .experience-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* Services Stack */
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 450px;
+    margin: 0 auto;
+  }
+
+
+
+  /* Footer Stack */
+  .footer-top {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+}
+
+/* 480px Breakpoint (Small Phones / Portrait) */
+@media (max-width: 480px) {
+  :root {
+    --header-height: 65px;
+  }
+
+  section {
+    padding: 60px 0;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .hero-title {
+    font-size: 2.6rem;
+  }
+
+  .hero-btns {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .hero-btns .btn {
+    width: 100%;
+  }
+
+  .floating-badge {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+  }
+
+  .badge-node { top: 15%; left: -5%; }
+  .badge-laravel { top: 25%; right: -8%; }
+  .badge-react { bottom: 30%; left: -10%; }
+  .badge-ai { bottom: 20%; right: -2%; }
+
+  .profile-details-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+
+
+
+
+  .back-to-top {
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+  }
+}
